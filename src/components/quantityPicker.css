@@ -1,0 +1,35 @@
+.quantityPicker{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    font-family: 'Lato', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: #333;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+.quantityPicker .btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    outline: none;
+}
+.quantityPicker .btn i{
+    font-size: 1.2rem;
+    color: #333;
+}
+.quantityPicker .btn:hover{
+    background-color: #eee;
+}

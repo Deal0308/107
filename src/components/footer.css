@@ -1,0 +1,19 @@
+.footer {
+    background-color: #2d2a2a46;
+    padding: 25px;
+    text-align: center;
+    color: #000;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 1.5;
+    margin-top: 50px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+
+}
+.footer label {
+    color: #000;
+    text-decoration: none;
+
+}
