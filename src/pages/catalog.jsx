@@ -1,36 +1,50 @@
+import React, { useState } from "react";
 import Product from "../components/product";
-import DataService from "../services/dataService";
-import "./catalog.css";
-import { useEffect, useState } from "react"; // this is a hook
+import service from "../services/service";
 
-function Catalog() {
-    //create a state variable to hold the list of prods
-    const [products, setProducts] = useState([]);
+const Catalog = () => {
+  const [products, setProducts] = useState(service.getCatalog());
+  const categories = ["All", ...service.getCategories()];
 
-    //let array = [];
-
-    //when the component is loaded, run this code
-    useEffect(function(){
-        console.log("catalog component is loaded");
-        loadCatalog();
-        //this is very similar to the init
-    }, []);
-
-    function loadCatalog(){
-        //get the products that i have in the data service
-        let service = new DataService();
-        let prods = service.getCatalog();
-        console.log(prods);
-        setProducts(prods);
+  const filter = (category) => {
+    if (category === "All") {
+      setProducts(service.getCatalog());
+    } else {
+      let list = [];
+      for (let product of service.getCatalog()) {
+        if (product.category === category) {
+          let prod = <Product key={product.id} data={product} />;
+          list.push(prod);
+        }
+      }
+      setProducts(list);
     }
+  };
 
-    return (
-        <div className="catalog">
-            <h1>Our amazing catalog</h1>
-            <h2>Currently we have {products.length} products for you</h2>
-            {products.map(arrowProducts => <Product data={arrowProducts}/>)}
-        </div>
-    );
-}
+  const clearFilters = () => {
+    setProducts(service.getCatalog());
+  };
 
-    export default Catalog;
+  const arrowProducts = products.map((product) => (
+    <Product key={product.id} data={product} />
+  ));
+
+  return (
+    <div className="catalog">
+      <h1>Our amazing catalog</h1>
+      <h2>Currently we have {products.length} products for you</h2>
+      <br />
+      <button onClick={clearFilters} className="btn btn-sm btn-dark">
+        Clear
+      </button>
+      {categories.map((category) => (
+        <button key={category} onClick={() => filter(category)}>
+          {category}
+        </button>
+      ))}
+      {arrowProducts}
+    </div>
+  );
+};
+
+export default Catalog;

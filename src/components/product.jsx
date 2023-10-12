@@ -1,5 +1,5 @@
 import "./product.css";
-import QuantityPicker from "../quantityPicker/quantityPicker";
+import QuantityPicker from "../components/quantityPicker";
 import { useEffect} from "react";
 
 function Product(props){
@@ -7,6 +7,10 @@ function Product(props){
     useEffect(function(){
         console.log("product component is loaded");
     }, []);
+    function onQuantityChange(qty){
+        
+        
+    }
 
     return (
         <div className="product">
@@ -17,7 +21,7 @@ function Product(props){
                 <label>Total:</label>
               </div>
                 <div>
-                    <QuantityPicker></QuantityPicker>
+                    <QuantityPicker onChange={onQuantityChange}/>
                     <button className="btn btn-sm btn-info">Add</button>
                 </div>
         </div>
@@ -25,3 +29,4 @@ function Product(props){
 
 }
 
+export default Product;

@@ -104,8 +104,10 @@ let catalog = [
     
 ];
 class DataService {
-    getProducts() {
-        return catalog;
+    getCatalog() {
+      // Return the catalog data here
     }
-}
+  }
+  
+  
 export default DataService;
