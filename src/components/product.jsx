@@ -8,14 +8,14 @@ function Product(props){
         console.log("product component is loaded");
     }, []);
     function onQuantityChange(qty){
-        
+
         
     }
 
     return (
         <div className="product">
            <h5>{props.data.title}</h5>
-              <img src={"/images/products/" + props.data.image} alt="placeholder"></img>
+              <img src={"../images/627.png" + props.data.image} alt="placeholder"></img>
               <div>
                 <label>Price:{props.data.price}</label>
                 <label>Total:</label>
