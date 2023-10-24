@@ -15,7 +15,7 @@ function Product(props){
     return (
         <div className="product">
            <h5>{props.data.title}</h5>
-              <img src={"../images/627.png" + props.data.image} alt="placeholder"></img>
+              <img src={"../images/" + props.data.image} alt="placeholder"></img>
               <div>
                 <label>Price:{props.data.price}</label>
                 <label>Total:</label>

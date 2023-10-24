@@ -1,12 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Product from "../components/product";
-import service from "../services/service";
+import DataService from "../services/dataservice";
 
 const Catalog = () => {
-  const [products, setProducts] = useState(service.getCatalog());
-  const categories = ["All", ...service.getCategories()];
+  const [products, setProducts] = useState([]);
+  const categories = ["All",];
+
+  const loadCatalog = () => {
+    const service = new DataService();
+    setProducts(service.getCatalog());
+  }
 
   const filter = (category) => {
+    const service = new DataService();
+
     if (category === "All") {
       setProducts(service.getCatalog());
     } else {
@@ -22,12 +29,17 @@ const Catalog = () => {
   };
 
   const clearFilters = () => {
+    const service = new DataService();
     setProducts(service.getCatalog());
   };
 
   const arrowProducts = products.map((product) => (
     <Product key={product.id} data={product} />
   ));
+
+  useEffect(() => {
+    loadCatalog();
+  }, []);
 
   return (
     <div className="catalog">
