@@ -3,6 +3,7 @@ import Product from "../components/product";
 import "./catalog.css"
 
 
+
 function Home(props) {
   const { catalog } = props;
 

@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/navbar';
 import Footer from './components/footer';
 import Catalog from './pages/catalog';
@@ -8,6 +8,8 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 import About from './pages/about';
 import Home from './pages/home';
 import Admin from './pages/admin';
+import { getProducts } from './services/dataservice.js';
+
 
 import {BrowserRouter,Routes,Route} from 'react-router-dom';
 
@@ -15,9 +17,18 @@ import {BrowserRouter,Routes,Route} from 'react-router-dom';
 
 
 function App() {
-  let catalog = [
-  ]; // your catalog data
-  console.log(catalog); // add this line to check if the catalog prop is being passed correctly
+  const [catalog, setCatalog] = useState([]);
+
+  useEffect(() => {
+    getProducts()
+      .then((data) => {
+        setCatalog(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
   return (
     <BrowserRouter>
       <div className="App"> 
@@ -29,11 +40,11 @@ function App() {
           <Route path="/about" element={<About/>}/>
           <Route path="/admin" element={<Admin/>}/>
         </Routes>
+
         
         <Footer/>
       </div>
     </BrowserRouter>
   );
 }
-  
 export default App;

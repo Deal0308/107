@@ -14,6 +14,7 @@ const catalog = [
     { id: 13, name: "Shoe 13", price: 170, category: "Boots", image: "image13.jpg" },
     { id: 14, name: "Shoe 14", price: 180, category: "Boots", image: "image14.jpg" },
     { id: 15, name: "Shoe 15", price: 190, category: "Boots", image: "image15.jpg" },
+
   ];
   
   
@@ -28,4 +29,10 @@ const catalog = [
     },
   };
   
-  export default DataService;
+  export default DataService;// dataservice.js
+
+export const getProducts = async () => {
+  const response = await fetch('/api/products');
+  const data = await response.json();
+  return data;
+};
