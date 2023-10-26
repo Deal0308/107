@@ -8,3 +8,20 @@
     font-weight: bold;
     font-family: 'Roboto', sans-serif;
 }
+.navbar a {
+    color: #1b107c;
+    text-decoration: none;
+}
+/* make navbar extend the whole page */
+.navbar {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+/* make navbar links appear side by side */
+.navbar a {
+    float: left;
+    display: block;
+    padding: 10px;
+}

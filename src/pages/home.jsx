@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import Product from "../components/product";
-import "../styles/catalog.css";
-
 
 function Home(props) {
   const { catalog } = props;
