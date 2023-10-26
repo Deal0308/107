@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Product from "../components/product";
-import "../styles/catalog.css";
+import "./catalog.css"
 
 
 function Home(props) {

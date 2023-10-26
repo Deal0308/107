@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/product.css";
+import "./product.css";
 
 const Product = ({ data }) => {
   const [quantity, setQuantity] = useState(1);
