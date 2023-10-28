@@ -1,25 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./product.css";
+import DataContext from "./dataContext";
 
-const Product = ({ data }) => {
+function Product(props) {
   const [quantity, setQuantity] = useState(1);
-  const total = (data.price * quantity).toFixed(2);
+  const addToCart = useContext(DataContext).addToCart;
 
-  const handleQuantityChange = (event) => {
-    setQuantity(parseInt(event.target.value));
-  };
+  function handleQuantityChange(event) {
+    setQuantity(event.target.value);
+  }
+
+  function handleAdd() {
+    let prodForCart = {
+      ...props.data,
+      quantity: quantity,
+    };
+    addToCart(prodForCart);
+  }
+
+  const total = (props.data.price * quantity).toFixed(2);
 
   return (
-    <div>
-      <h2>{data.name}</h2>
-      <p>Price: ${data.price.toFixed(2)}</p>
+    <div className="product">
+      <img src={"/images" + props.data.image} alt="placeholder" />
+      <h2>{props.data.name}</h2>
+      <p>Price: ${props.data.price.toFixed(2)}</p>
       <p>
         Quantity:{" "}
         <input type="number" value={quantity} onChange={handleQuantityChange} />
       </p>
       <p>Total: ${total}</p>
+      <button onClick={handleAdd}>Add to Cart</button>
     </div>
   );
-};
+}
 
 export default Product;

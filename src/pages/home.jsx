@@ -2,17 +2,19 @@ import React, { useState } from "react";
 import Product from "../components/product";
 
 function Home(props) {
-  const { catalog } = props;
-
-  const arrowProducts = catalog.map((product) => (
-    <Product key={product.id} data={product} addToCart={addToCart} />
-  ));
-
   const [total, setTotal] = useState(0);
+  const { catalog } = props;
 
   const addToCart = (product) => {
     setTotal(total + product.price);
   };
+
+  const arrowProducts = catalog?.map((product) => (
+    <Product key={product.id} data={product} addToCart={addToCart} />
+  ));
+
+
+ 
 
   return (
     <div className="home">

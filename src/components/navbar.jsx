@@ -1,10 +1,15 @@
 import "./navbar.css";
 import React from "react";
 import { Link } from "react-router-dom";
+import DataContext from "../../store/dataContext";
+import { useContext } from "react";
 
 
 
 function Navbar(){
+
+  const user =useContext(DataContext).user;
+  const cart =useContext(DataContext).cart;
     return (
         <div className="navbar">
       <nav className="navbar navbar-expand-lg bg-body-tertiary"></nav>
@@ -27,17 +32,22 @@ function Navbar(){
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <Link className="nav-link active" aria-current="page" to="/">
-                Home
+                Home<FontAwesomeIcon icon="fa-solid fa-house" />
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/catalog">
-                Catalog
+                Catalog<FontAwesomeIcon icon="fa-solid fa-store" />
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/about">
-                About Us
+                About Us<FontAwesomeIcon icon="fa-solid fa-address-card" />
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/cart">
+                Cart
               </Link>
             </li>
             <li className="nav-item dropdown">
@@ -48,7 +58,7 @@ function Navbar(){
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Dropdown
+                Dropdown<FontAwesomeIcon icon="fa-solid fa-circle-chevron-down" />
               </a>
               <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
@@ -79,9 +89,9 @@ function Navbar(){
               placeholder="Search"
               aria-label="Search"
             />
-            <button className="btn btn-outline-success" type="submit">
-              Search
-            </button>
+            <Link to="/cart" className="btn btn-outline-light">
+              Cart<FontAwesomeIcon icon="fa-solid fa-cart-shopping" />
+            </Link>
           </form>
         </div>
       </div>
