@@ -1,0 +1,115 @@
+.cart-product{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 15px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.cart-product .info{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+.cart-product .info .details{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+}
+.cart-product .info .details .image{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    margin-right: 15px;
+}
+.cart-product .info .details .image img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.cart-product .info .details .name{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    font-family: 'Lato', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: #333;
+}
+.cart-product .info .details .name h3{
+    margin: 0;
+    margin-bottom: 5px;
+}
+.cart-product .info .details .name p{
+    margin: 0;
+    margin-bottom: 5px;
+}
+.cart-product .info .details .name p span{
+    font-weight: 700;
+}
+.cart-product .info .details .name .price{
+    font-weight: 700;
+}
+.cart-product .info .details .name .price span{
+    font-weight: 300;
+}
+.cart .list{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.cart .list .item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.cart .list .item .info{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+.cart .list .item .info .details{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+}
+.cart .list .item .info .details .image{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    margin-right: 15px;
+}

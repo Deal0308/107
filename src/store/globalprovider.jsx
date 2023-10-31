@@ -6,12 +6,23 @@ function GlobalProvider({ children }) {
     const [user, setUser] = useState({ name: "John Doe" });
 
     function addToCart(product) {
-        setCart([...cart, product]);
+        let copy = [...cart];
+
+        let found = false;
+        for (let i = 0; i < cart.length; i++) {
+            const item = cart[i];
+            if (item.id === product.id) {
+                found = true;
+                item.quantity += product.quantity;
+            }
+        }
+        if (!found) {
+            copy.push(product);
+        }
+        setCart(copy);
     }
 
-    function removeFromCart(product) {
-        setCart(cart.filter((item) => item.id !== product.id));
-    }
+    function removeFromCart() {}
 
     return (
         <DataContext.Provider

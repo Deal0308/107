@@ -10,12 +10,21 @@ function Navbar(){
 
   const user =useContext(DataContext).user;
   const cart =useContext(DataContext).cart;
+
+  function getCount(){
+    let sum = 0;
+    
+    for(let i = 0; i < cart.length; i++){
+    const product = cart[i];
+    sum += product.quantity;    }
+    return sum;
+  }
     return (
         <div className="navbar">
       <nav className="navbar navbar-expand-lg bg-body-tertiary"></nav>
   <div className="container-fluid"></div>
     <Link className="navbar-brand" to="/">
-      Navbar
+      Sneaker Store
     </Link>
     <button
       className="navbar-toggler"
