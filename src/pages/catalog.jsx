@@ -1,30 +1,68 @@
-import React, { useState } from "react";
-import Product from "../components/product";
-import "./catalog.css"
+import Product from '../components/product';
+import DataService from '../services/dataservice';
+import './catalog.css';
+import { useEffect, useState } from 'react';
 
+function Catalog() {
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]); //[] means that im expecting several
+  const [productsToDisplay, setProductsToDisplay] = useState([]);
 
+  useEffect(function () {
+    console.log('catalog loaded');
+    loadCatalog();
+  }, []);
 
-function Home(props) {
-  const [total, setTotal] = useState(0);
-  const { catalog } = props;
+  function loadCatalog() {
+    let service = new DataService();
+    let prods = service.getProducts();
+    console.log(prods);
+    setProducts(prods);
+    setProductsToDisplay(prods);
 
-  const addToCart = (product) => {
-    setTotal(total + product.price);
-  };
+    let cats = ['fruit', 'farm', 'groseries', 'merchandise'];
+    setCategories(cats);
+  }
 
-  const arrowProducts = catalog?.map((product) => (
-    <Product key={product.id} data={product} addToCart={addToCart} />
-  ));
+  function filter(category) {
+    console.log(category);
+    let list = [];
+
+    for (let i = 0; i < products.length; i++) {
+      let prod = products[i];
+      if (prod.category === category) {
+        list.push(prod);
+      }
+    }
+    
+    setProductsToDisplay(list);
+  }
+
+  function clearFilters() {
+    setProductsToDisplay(products);
+  }
 
   return (
-    <div className="home">
-      <h1>Our amazing catalog</h1>
-      <h2>Currently we have {catalog.length} products for you</h2>
+    <div className="catalog page">
+      <h1 className="title">Fersh products, always!</h1>
+      <button onClick={clearFilters} className="btn btn-sm btn-dark">
+        Clear
+      </button>
+      {categories.map((arrowCategories) => (
+        <button
+          key={arrowCategories}
+          onClick={() => filter(arrowCategories)}
+          className="btn btn-sm btn-primary btn-filter"
+        >
+          {arrowCategories}
+        </button>
+      ))}
       <br />
-      <div className="products">{arrowProducts}</div>
-      <p>Total: ${total}</p>
+      {productsToDisplay.map((item) => (
+        <Product key={item._id} data={item} />
+      ))}
     </div>
   );
 }
 
-export default Home;
+export default Catalog;

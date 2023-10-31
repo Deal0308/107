@@ -1,81 +1,126 @@
-import React, { useState, useEffect } from "react";
-import "./admin.css";
+import { useState } from 'react';
+import './admin.css';
 
 function Admin() {
-  const [shoes, setShoes] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
+  const [product, setProduct] = useState({
+    title: '',
+    category: '',
+    image: '',
+    price: 0,
+  });
 
-  useEffect(() => {
-    fetch("/api/shoes")
-      .then((response) => response.json())
-      .then((data) => {
-        if (Array.isArray(data)) {
-          setShoes(data);
-        } else {
-          throw new Error("Invalid data format");
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+  const [allCoupons, setAllCoupons] = useState([]);
+  const [coupon, setCoupon] = useState({
+    code: '',
+    discount: 0,
+  });
 
-  const handleDeleteShoe = (id) => {
-    // delete shoe logic
-  };
+  function handleProductChange(e) {
+    let name = e.target.name;
+    // create a copy
+    // modify the copy
+    // set the copy back
+    let copy = { ...product };
+    copy[name] = e.target.value;
+    setProduct(copy);
+  }
 
-  const handleAddShoe = (event) => {
-    event.preventDefault();
-    // add shoe logic
-  };
+  function saveProduct() {
+    console.log(product);
+
+    let copy = [...allProducts];
+    copy.push(product);
+    setAllProducts(copy);
+  }
+
+  function handleCouponChange(e) {
+    let name = e.target.name;
+
+    let copy = { ...coupon };
+    copy[name] = e.target.value;
+    setCoupon(copy);
+  }
+
+  function saveCoupon() {
+    console.log(coupon);
+
+    let copy = [...allCoupons];
+    copy.push(coupon);
+    setAllCoupons(copy);
+  }
 
   return (
-    <div className="admin">
-      <h1>Admin Panel</h1>
-      <h2>Shoes</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {shoes.map((shoe) => (
-            <tr key={shoe.id}>
-              <td>{shoe.name}</td>
-              <td>{shoe.price}</td>
-              <td>{shoe.quantity}</td>
-              <td>
-                <button onClick={() => handleDeleteShoe(shoe.id)}>
-                  Delete
-                </button>
-              </td>
-            </tr>
+    <div className="admin page">
+      <h1 className="title">Manage your store</h1>
+
+      <div className="parent">
+        <section className="products">
+          <div className="form">
+            <h4>Create Products</h4>
+
+            <div className="control">
+              <label className="form-label">Title</label>
+              <input onChange={handleProductChange} name="title" type="text" className="form-control" />
+            </div>
+
+            <div className="control">
+              <label className="form-label">Category</label>
+              <input onChange={handleProductChange} name="category" type="text" className="form-control" />
+            </div>
+
+            <div className="control">
+              <label className="form-label">Image</label>
+              <input onChange={handleProductChange} name="image" type="text" className="form-control" />
+            </div>
+
+            <div className="control">
+              <label className="form-label">Price</label>
+              <input onChange={handleProductChange} name="price" type="number" className="form-control" />
+            </div>
+
+            <div className="control">
+              <button onClick={saveProduct} className="btn btn-dark">
+                Save Product
+              </button>
+            </div>
+          </div>
+
+          {allProducts.map((prod) => (
+            <p key={prod.title}>
+              {prod.title} ${prod.price}
+            </p>
           ))}
-        </tbody>
-      </table>
-      <h2>Add Shoe</h2>
-      <form onSubmit={handleAddShoe}>
-        <label htmlFor="name">Name:</label>
-        <input type="text" id="name" name="name" required />
-        <br />
-        <label htmlFor="price">Price:</label>
-        <input
-          type="number"
-          id="price"
-          name="price"
-          min="0"
-          step="0.01"
-          required
-        />
-        <br />
-        <label htmlFor="quantity">Quantity:</label>
-        <input type="number" id="quantity" name="quantity" min="0" required />
-        <br />
-        <button type="submit">Add Shoe</button>
-      </form>
+        </section>
+
+        <section className="codes">
+          <div className="form">
+            <h4>Create Coupons</h4>
+
+            <div className="control">
+              <label className="form-label">Code</label>
+              <input onBlur={handleCouponChange} name="code" type="text" className="form-control" />
+            </div>
+
+            <div className="control">
+              <label className="form-label">Discount</label>
+              <input onBlur={handleCouponChange} name="discount" type="number" className="form-control" />
+            </div>
+
+            <div className="control">
+              <button onClick={saveCoupon} className="btn btn-dark">
+                Save Coupon
+              </button>
+            </div>
+          </div>
+
+          {allCoupons.map((coupon) => (
+            <p key={coupon.code}>
+              {coupon.code} - {coupon.discount}
+            </p>
+          ))}
+        </section>
+      </div>
     </div>
   );
 }
