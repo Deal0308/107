@@ -1,3 +1,9 @@
+import axios from 'axios';
+import Product from '../components/product';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 let catalog =[
   {
       "title": "No Xplode",
@@ -52,9 +58,24 @@ let catalog =[
 ];
 
 class DataService {
-  getProducts(){
+ async getProducts(){
       return catalog;
+    const response = await axios.get('http://127.0.0.1:5000/api/catalog');
+
+    return response.data;
+    }
+
+    async saveProduct(product){
+    const response = await axios.get('http://127.0.0.1:5000/api/catalog', product);
+    return response.data;
+    
   }
+  async getCoupons(){
+    const response = await axios.get('http://127.0.0.1:5000/api/coupons');
+    return response.data;
+
+
+}
 }
 
 export default DataService;

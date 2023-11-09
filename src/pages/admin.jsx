@@ -1,20 +1,43 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './admin.css';
+import DataService from '../services/dataservice';
 
 function Admin() {
-  const [allProducts, setAllProducts] = useState([]);
+
+  const [allProduct, setALLProduct] = useState({});
   const [product, setProduct] = useState({
     title: '',
     category: '',
-    image: '',
     price: 0,
+    image: '',
   });
 
   const [allCoupons, setAllCoupons] = useState([]);
   const [coupon, setCoupon] = useState({
+
     code: '',
     discount: 0,
   });
+  useEffect(function () {
+    loadProducts();
+    loadCoupons();
+  }, []);
+
+  async function loadProducts() {
+    const service = new DataService();
+    let productsResponse = await service.getProducts();
+    setALLProduct(productsResponse);
+
+  }
+
+  async function loadCoupons() {
+    let service = new DataService();
+    let couponsResponse = await service.getCoupons();
+    setAllCoupons(couponsResponse);
+  }
+
+
+
 
   function handleProductChange(e) {
     let name = e.target.name;
@@ -26,29 +49,49 @@ function Admin() {
     setProduct(copy);
   }
 
-  function saveProduct() {
-    console.log(product);
+ async function saveProduct() {
+    // fix the price to be a number
+    let fixedProduct = { ...product };
+    fixedProduct.price = Number(fixedProduct.price);
+
+    const service = new DataService();
+    await service.saveProduct(fixedProduct);
+
+
 
     let copy = [...allProducts];
     copy.push(product);
     setAllProducts(copy);
   }
 
+
   function handleCouponChange(e) {
     let name = e.target.name;
+    
 
     let copy = { ...coupon };
     copy[name] = e.target.value;
     setCoupon(copy);
+
   }
 
-  function saveCoupon() {
-    console.log(coupon);
+  async function saveCoupon() {
+    // fix the price to be a number
+    let fixedCoupon = { ...coupon };
+    fixedCoupon.discount = Number(fixedCoupon.discount);
+    const service = new DataService();
+    let savedCoupon = await service.saveCoupon(fixedCoupon);
+    console.log(savedCoupon);
+    
+
+
+
 
     let copy = [...allCoupons];
     copy.push(coupon);
     setAllCoupons(copy);
   }
+
 
   return (
     <div className="admin page">

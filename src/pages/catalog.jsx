@@ -13,14 +13,14 @@ function Catalog() {
     loadCatalog();
   }, []);
 
-  function loadCatalog() {
+ async function loadCatalog() {
     let service = new DataService();
-    let prods = service.getProducts();
+    let prods = await service.getProducts();
     console.log(prods);
     setProducts(prods);
     setProductsToDisplay(prods);
 
-    let cats = ['fruit', 'farm', 'groseries', 'merchandise'];
+    let cats = ['vitamins', 'protein', 'preworkout',];
     setCategories(cats);
   }
 
